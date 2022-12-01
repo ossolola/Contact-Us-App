@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <div class="container">
+        <nav>
+            <div class="nav-bar">
+                <a href="portfolio.html#about-me" class="nav-link"><span class="nav-number">01. </span> About</a>           
+                <a href="" class="nav-link"><span class="nav-number">02. </span> Contact</a>           
+                <a href="" class="nav-link"><span class="nav-number">03. </span> Services</a>           
+                <a href="portfolio.html#projects" class="nav-link"><span class="nav-number">04. </span> Projects</a>           
+            </div>
+        </nav>
+    
+        <main>
+            <h2 class="form-header">Get in  Touch</h2>
+            <p>If you have any questions or need help, please fill out the form below. We do our best to respond within 1 day.</p>
+    
+            <form action="" id="contact-form">
+                <input id="name" type="text" name="name" placeholder="Name">
+    
+                <input id="email" type="email" name="email" placeholder="Your Email Address" />
+    
+                <input id="subject" type="text" name="subject" placeholder="Subject">
+    
+                <textarea id="message"  name="message" cols="30" rows="10" placeholder="Message"></textarea>
+    
+                <button type="submit" class="btn">Submit</button>
+            </form>
+        </main>
+    
+        <footer>
+            <div class="footer">
+                <a href="" class="footer">Designed &amp; Built by Sijibomi Solola</a>
+            </div>
+        </footer>
+    </div>
+
+    <script type="text/javascript">
+        // Add Event Listener
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            // Get Form Data
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            const url = 'http://localhost:4000/';
+
+            const data = { name, email, subject, message }
+
+            // Create Request object
+            const request = new Request(url, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: new Headers({
+                    'Content-Type' : 'application/json'
+                })
+            })
+
+            // pass object to fetch
+            fetch(request)
+            .then((res) => res.json())
+            .then((res) => {
+                console.log(res.message)
+                alert(res.message)
+            })
+        })
+    </script>
+</body>
+</html>
